@@ -26,6 +26,7 @@ import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import AdminProducts from "./pages/admin/Products";
 import AdminCategories from "./pages/admin/Categories";
 import AdminEstimations from "./pages/admin/Estimations";
+import AdminUsers from "./pages/admin/Users";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const App = () => (
               <Route path="products" element={<AdminProducts />} />
               <Route path="categories" element={<AdminCategories />} />
               <Route path="estimations" element={<AdminEstimations />} />
+              <Route path="users" element={<AdminUsers />} />
             </Route>
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
