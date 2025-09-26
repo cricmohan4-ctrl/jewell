@@ -15,6 +15,7 @@ export const Header = () => {
           </div>
           <nav className="hidden md:flex md:space-x-8">
             <Link to="/" className="text-gray-500 hover:text-gray-900">Home</Link>
+            <Link to="/shop" className="text-gray-500 hover:text-gray-900">Shop</Link>
             <Link to="/pledge" className="text-gray-500 hover:text-gray-900">Pledge Jewelry</Link>
             <Link to="/sell" className="text-gray-500 hover:text-gray-900">Sell Jewelry</Link>
             <Link to="/branches" className="text-gray-500 hover:text-gray-900">Branch Locator</Link>
