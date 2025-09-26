@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Gem } from "lucide-react";
+import { DynamicNavigation } from "./DynamicNavigation";
 
 export const Header = () => {
   return (
@@ -13,15 +14,9 @@ export const Header = () => {
               <span className="text-2xl font-bold text-gray-800">JewelPledge</span>
             </Link>
           </div>
-          <nav className="hidden md:flex md:space-x-8">
-            <Link to="/" className="text-gray-500 hover:text-gray-900">Home</Link>
-            <Link to="/shop" className="text-gray-500 hover:text-gray-900">Shop</Link>
-            <Link to="/pledge" className="text-gray-500 hover:text-gray-900">Pledge Jewelry</Link>
-            <Link to="/sell" className="text-gray-500 hover:text-gray-900">Sell Jewelry</Link>
-            <Link to="/branches" className="text-gray-500 hover:text-gray-900">Branch Locator</Link>
-            <Link to="/faq" className="text-gray-500 hover:text-gray-900">FAQ</Link>
-            <Link to="/contact" className="text-gray-500 hover:text-gray-900">Contact</Link>
-          </nav>
+          
+          <DynamicNavigation />
+
           <div className="flex items-center">
             <Button>Get Instant Estimate</Button>
           </div>
