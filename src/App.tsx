@@ -18,6 +18,7 @@ import AdminBranches from "./pages/admin/Branches";
 import AdminSubmissions from "./pages/admin/Submissions";
 import Shop from "./pages/Shop";
 import AdminMenus from "./pages/admin/Menus";
+import ShopLayout from "./components/ShopLayout";
 
 const queryClient = new QueryClient();
 
@@ -30,13 +31,16 @@ const App = () => (
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
-            <Route path="/shop" element={<Shop />} />
             <Route path="/pledge" element={<PledgeJewelry />} />
             <Route path="/sell" element={<SellJewelry />} />
             <Route path="/branches" element={<BranchLocator />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/estimate" element={<PriceEstimate />} />
+          </Route>
+
+          <Route element={<ShopLayout />}>
+            <Route path="/shop" element={<Shop />} />
           </Route>
 
           <Route path="/admin" element={<AdminLayout />}>
