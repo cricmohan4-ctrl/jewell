@@ -6,11 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { IndianRupee, Trash2 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const { items, removeFromCart, updateQuantity, totalItems, totalPrice } = useCart();
-  const navigate = useNavigate();
 
   if (items.length === 0) {
     return (
@@ -97,8 +96,8 @@ const CartPage = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <Button size="lg" className="w-full" onClick={() => navigate('/checkout')}>
-                Proceed to Checkout
+              <Button size="lg" className="w-full" asChild>
+                <Link to="/checkout">Proceed to Checkout</Link>
               </Button>
             </CardFooter>
           </Card>

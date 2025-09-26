@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Gem, ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/context/AuthContext";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -15,6 +16,7 @@ const navLinks = [
 
 export const Header = () => {
   const { totalItems } = useCart();
+  const { isAuthenticated, currentUser, logout } = useAuth();
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -43,9 +45,21 @@ export const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <Button asChild>
-              <Link to="/pledge">Get Instant Estimate</Link>
-            </Button>
+            {isAuthenticated && currentUser ? (
+              <>
+                <span className="text-sm font-medium hidden sm:block">Welcome, {currentUser.name.split(' ')[0]}</span>
+                <Button variant="outline" onClick={logout}>Logout</Button>
+              </>
+            ) : (
+              <>
+                <Button asChild variant="ghost">
+                  <Link to="/login">Login</Link>
+                </Button>
+                <Button asChild>
+                  <Link to="/register">Register</Link>
+                </Button>
+              </>
+            )}
             <Link to="/cart" className="relative">
               <Button variant="outline" size="icon">
                 <ShoppingCart className="h-5 w-5" />

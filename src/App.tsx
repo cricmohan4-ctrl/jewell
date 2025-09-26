@@ -27,6 +27,10 @@ import AdminProducts from "./pages/admin/Products";
 import AdminCategories from "./pages/admin/Categories";
 import AdminEstimations from "./pages/admin/Estimations";
 import AdminUsers from "./pages/admin/Users";
+import { AuthProvider } from "./context/AuthContext";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -35,42 +39,49 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <CartProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Index />} />
-              <Route path="/pledge" element={<PledgeJewelry />} />
-              <Route path="/sell" element={<SellJewelry />} />
-              <Route path="/branches" element={<BranchLocator />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/estimate" element={<PriceEstimate />} />
-            </Route>
+      <AuthProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Index />} />
+                <Route path="/pledge" element={<PledgeJewelry />} />
+                <Route path="/sell" element={<SellJewelry />} />
+                <Route path="/branches" element={<BranchLocator />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/estimate" element={<PriceEstimate />} />
+              </Route>
 
-            <Route element={<ShopLayout />}>
-              <Route path="/shop" element={<Shop />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
-            </Route>
+              <Route element={<ShopLayout />}>
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+                </Route>
+              </Route>
 
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="submissions" element={<AdminSubmissions />} />
-              <Route path="branches" element={<AdminBranches />} />
-              <Route path="menus" element={<AdminMenus />} />
-              <Route path="products" element={<AdminProducts />} />
-              <Route path="categories" element={<AdminCategories />} />
-              <Route path="estimations" element={<AdminEstimations />} />
-              <Route path="users" element={<AdminUsers />} />
-            </Route>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="submissions" element={<AdminSubmissions />} />
+                <Route path="branches" element={<AdminBranches />} />
+                <Route path="menus" element={<AdminMenus />} />
+                <Route path="products" element={<AdminProducts />} />
+                <Route path="categories" element={<AdminCategories />} />
+                <Route path="estimations" element={<AdminEstimations />} />
+                <Route path="users" element={<AdminUsers />} />
+              </Route>
 
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
