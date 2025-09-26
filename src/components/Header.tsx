@@ -4,15 +4,7 @@ import { Gem, ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/context/AuthContext";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/pledge", label: "Pledge Jewelry" },
-  { href: "/sell", label: "Sell Jewelry" },
-  { href: "/branches", label: "Branch Locator" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
-];
+import { DynamicNavigation } from "./DynamicNavigation";
 
 export const Header = () => {
   const { totalItems } = useCart();
@@ -31,17 +23,7 @@ export const Header = () => {
           </div>
 
           {/* Menu */}
-          <nav className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <DynamicNavigation />
 
           {/* Actions */}
           <div className="flex items-center gap-4">
