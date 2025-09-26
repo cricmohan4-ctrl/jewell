@@ -24,6 +24,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { toast } from "sonner";
+import { branches } from "@/data/branches";
+import { findNearestBranch } from "@/lib/location";
 
 const pledgeFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -52,9 +54,42 @@ export const PledgeForm = () => {
 
   const photoRef = form.register("photos");
 
-  function onSubmit(values: z.infer<typeof pledgeFormSchema>) {
-    console.log(values);
-    toast.success("Estimate request submitted successfully!");
+  const getUserLocation = (): Promise<{ latitude: number; longitude: number }> => {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error("Geolocation is not supported by your browser."));
+      } else {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            resolve({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            });
+          },
+          () => {
+            reject(new Error("Unable to retrieve your location."));
+          }
+        );
+      }
+    });
+  };
+
+  async function onSubmit(values: z.infer<typeof pledgeFormSchema>) {
+    const loadingToast = toast.loading("Finding nearest branch...");
+
+    let nearestBranchAddress = "123 Diamond Street, Mumbai"; // Default branch
+
+    try {
+      const { latitude, longitude } = await getUserLocation();
+      const nearestBranch = findNearestBranch(latitude, longitude, branches);
+      if (nearestBranch) {
+        nearestBranchAddress = nearestBranch.address;
+      }
+      toast.success("Found nearest branch!", { id: loadingToast });
+    } catch (error) {
+      console.error(error);
+      toast.error("Could not access location. Using default branch.", { id: loadingToast });
+    }
 
     // Simple logic to generate a fake estimate
     const weight = parseFloat(values.jewelWeight) || 10;
@@ -66,7 +101,7 @@ export const PledgeForm = () => {
     navigate("/estimate", {
       state: {
         estimate: estimate,
-        branch: "123 Diamond Street, Mumbai", // Hardcoded for now
+        branch: nearestBranchAddress,
       },
     });
 
