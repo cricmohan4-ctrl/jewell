@@ -2,12 +2,15 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { type Product } from "@/data/products";
 import { IndianRupee, ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const { addToCart } = useCart();
+
   return (
     <Card className="flex flex-col">
       <CardHeader>
@@ -24,7 +27,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <IndianRupee className="h-5 w-5 mr-1" />
           {product.price.toLocaleString('en-IN')}
         </p>
-        <Button>
+        <Button onClick={() => addToCart(product)}>
           <ShoppingCart className="mr-2 h-4 w-4" />
           Add to Cart
         </Button>
