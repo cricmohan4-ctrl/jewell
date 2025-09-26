@@ -16,7 +16,7 @@ export const Hero = () => {
         </p>
         <div className="mt-8">
           <Link to="/pledge">
-            <Button size="lg">Start Now</Button>
+            <Button size="lg">Get an Instant Estimate</Button>
           </Link>
         </div>
       </div>
