@@ -1,13 +1,15 @@
-import { Hero } from "@/components/Hero";
-import { HowItWorks } from "@/components/HowItWorks";
-import { Testimonials } from "@/components/Testimonials";
+import { HeroCarousel } from "@/components/HeroCarousel";
+import { ShopByCategory } from "@/components/ShopByCategory";
+import { ProductCarousel } from "@/components/ProductCarousel";
+import { products } from "@/data/products";
 
 const Index = () => {
   return (
     <div>
-      <Hero />
-      <HowItWorks />
-      <Testimonials />
+      <HeroCarousel />
+      <ShopByCategory />
+      <ProductCarousel title="New Arrivals" products={products} />
+      <ProductCarousel title="Best Sellers" products={[...products].reverse()} />
     </div>
   );
 };
