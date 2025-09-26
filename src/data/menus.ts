@@ -10,6 +10,8 @@ export const menuItems: MenuItem[] = [
   // Top Level
   { id: 1, label: "Rings", link: "/shop/rings", parentId: null },
   { id: 2, label: "Earrings", link: "/shop/earrings", parentId: null },
+  { id: 13, label: "Necklaces", link: "/shop/necklaces", parentId: null },
+  { id: 14, label: "Bracelets", link: "/shop/bracelets", parentId: null },
   { id: 10, label: "Pledge Jewelry", link: "/pledge", parentId: null },
   { id: 11, label: "Sell Jewelry", link: "/sell", parentId: null },
   { id: 12, label: "Contact", link: "/contact", parentId: null },

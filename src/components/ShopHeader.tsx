@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
+import { menuItems } from "@/data/menus";
 
-const categories = [
-  { name: "Necklaces", href: "/shop/necklaces" },
-  { name: "Rings", href: "/shop/rings" },
-  { name: "Bracelets", href: "/shop/bracelets" },
-  { name: "Earrings", href: "/shop/earrings" },
-  { name: "All Jewelry", href: "/shop" },
-];
+// Filter for top-level menu items that are product categories
+const shopCategories = menuItems.filter(
+  (item) => item.parentId === null && item.link.startsWith("/shop")
+);
 
 export const ShopHeader = () => {
   return (
@@ -14,13 +12,19 @@ export const ShopHeader = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center h-12">
           <nav className="flex space-x-8">
-            {categories.map((category) => (
+            <Link
+              to="/shop"
+              className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+            >
+              All Jewelry
+            </Link>
+            {shopCategories.map((category) => (
               <Link
-                key={category.name}
-                to={category.href}
+                key={category.id}
+                to={category.link}
                 className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
               >
-                {category.name}
+                {category.label}
               </Link>
             ))}
           </nav>
