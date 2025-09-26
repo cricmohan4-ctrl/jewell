@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import Layout from "./components/Layout";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
+import PriceEstimate from "./pages/PriceEstimate";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/branches" element={<BranchLocator />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/estimate" element={<PriceEstimate />} />
           </Route>
 
           <Route path="/admin" element={<AdminLayout />}>

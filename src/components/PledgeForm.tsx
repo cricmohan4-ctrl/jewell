@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -37,6 +38,7 @@ const pledgeFormSchema = z.object({
 });
 
 export const PledgeForm = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof pledgeFormSchema>>({
     resolver: zodResolver(pledgeFormSchema),
     defaultValues: {
@@ -53,6 +55,21 @@ export const PledgeForm = () => {
   function onSubmit(values: z.infer<typeof pledgeFormSchema>) {
     console.log(values);
     toast.success("Estimate request submitted successfully!");
+
+    // Simple logic to generate a fake estimate
+    const weight = parseFloat(values.jewelWeight) || 10;
+    const baseValue = values.jewelType === 'diamond' ? 50000 : (values.jewelType === 'platinum' ? 3000 : 4500);
+    const randomFactor = 0.9 + Math.random() * 0.2; // +/- 10%
+    const estimate = Math.round((weight * baseValue * randomFactor) / 100) * 100;
+
+    // Navigate to the estimate page with state
+    navigate("/estimate", {
+      state: {
+        estimate: estimate,
+        branch: "123 Diamond Street, Mumbai", // Hardcoded for now
+      },
+    });
+
     form.reset();
   }
 
