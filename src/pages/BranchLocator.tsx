@@ -1,33 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
 import { branches, type Branch } from "@/data/branches";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 import { cn } from "@/lib/utils";
-
-// Fix for default marker icon issue with modern bundlers
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-});
-
-// Component to programmatically change map view
-const ChangeView = ({ center, zoom }: { center: [number, number]; zoom: number }) => {
-  const map = useMap();
-  useEffect(() => {
-    map.setView(center, zoom);
-  }, [center, zoom, map]);
-  return null;
-};
 
 const BranchLocator = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -36,12 +14,6 @@ const BranchLocator = () => {
   const filteredBranches = branches.filter(branch =>
     branch.address.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const mapCenter: [number, number] = selectedBranch
-    ? [selectedBranch.lat, selectedBranch.lng]
-    : [20.5937, 78.9629]; // Default center of India
-
-  const mapZoom = selectedBranch ? 14 : 5;
 
   return (
     <div className="container mx-auto py-12 px-4">
@@ -84,22 +56,9 @@ const BranchLocator = () => {
           </div>
         </div>
 
-        {/* Right Column: Map */}
-        <div className="lg:col-span-2 h-[500px] lg:h-auto rounded-lg overflow-hidden border">
-          <MapContainer center={mapCenter} zoom={mapZoom} scrollWheelZoom={false} className="h-full w-full">
-            <ChangeView center={mapCenter} zoom={mapZoom} />
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {filteredBranches.map(branch => (
-              <Marker key={branch.id} position={[branch.lat, branch.lng]}>
-                <Popup>
-                  <strong>{branch.name}</strong><br />{branch.address}
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
+        {/* Right Column: Map Placeholder */}
+        <div className="lg:col-span-2 h-[500px] lg:h-auto rounded-lg border flex items-center justify-center bg-gray-100">
+          <p className="text-gray-500">Map is temporarily disabled for debugging.</p>
         </div>
       </div>
     </div>
