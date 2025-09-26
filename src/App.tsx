@@ -14,6 +14,8 @@ import Layout from "./components/Layout";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import PriceEstimate from "./pages/PriceEstimate";
+import AdminBranches from "./pages/admin/Branches";
+import AdminSubmissions from "./pages/admin/Submissions";
 
 const queryClient = new QueryClient();
 
@@ -36,7 +38,8 @@ const App = () => (
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
-            {/* We can add more admin routes here later */}
+            <Route path="submissions" element={<AdminSubmissions />} />
+            <Route path="branches" element={<AdminBranches />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
