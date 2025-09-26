@@ -23,6 +23,8 @@ import { CartProvider } from "./context/CartContext";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
+import AdminProducts from "./pages/admin/Products";
+import AdminCategories from "./pages/admin/Categories";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +58,8 @@ const App = () => (
               <Route path="submissions" element={<AdminSubmissions />} />
               <Route path="branches" element={<AdminBranches />} />
               <Route path="menus" element={<AdminMenus />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="categories" element={<AdminCategories />} />
             </Route>
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
