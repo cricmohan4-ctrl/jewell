@@ -50,19 +50,33 @@ const AdminCategories = () => {
   };
 
   const handleDeleteCategory = (id: number) => {
-    setCategories(categories.filter((category) => category.id !== id));
+    const idsToDelete = new Set<number>([id]);
+    let changed = true;
+    while(changed) {
+      changed = false;
+      categories.forEach(category => {
+        if (category.parentId && idsToDelete.has(category.parentId) && !idsToDelete.has(category.id)) {
+          idsToDelete.add(category.id);
+          changed = true;
+        }
+      });
+    }
+    setCategories(categories.filter((category) => !idsToDelete.has(category.id)));
   };
 
-  const handleFormSubmit = (values: { name: string }) => {
+  const handleFormSubmit = (values: { name: string; parentId: string | null }) => {
+    const parentId = values.parentId ? parseInt(values.parentId, 10) : null;
+
     if (editingCategory) {
       setCategories(
         categories.map((category) =>
-          category.id === editingCategory.id ? { ...category, ...values } : category
+          category.id === editingCategory.id ? { ...category, name: values.name, parentId } : category
         )
       );
     } else {
       const newCategory = {
-        ...values,
+        name: values.name,
+        parentId,
         id: Math.max(...categories.map((c) => c.id), 0) + 1,
       };
       setCategories([...categories, newCategory]);
@@ -85,12 +99,13 @@ const AdminCategories = () => {
           <DialogHeader>
             <DialogTitle>{editingCategory ? "Edit Category" : "Add New Category"}</DialogTitle>
             <DialogDescription>
-              {editingCategory ? "Update the name of this category." : "Enter the name for the new category."}
+              {editingCategory ? "Update the details of this category." : "Fill in the details for the new category."}
             </DialogDescription>
           </DialogHeader>
           <CategoryForm
             onSubmit={handleFormSubmit}
             category={editingCategory}
+            categories={categories}
             onCancel={() => setIsDialogOpen(false)}
           />
         </DialogContent>
@@ -106,16 +121,16 @@ const AdminCategories = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>ID</TableHead>
                 <TableHead>Name</TableHead>
+                <TableHead>Parent</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {categories.map((category) => (
                 <TableRow key={category.id}>
-                  <TableCell className="font-medium">{category.id}</TableCell>
-                  <TableCell>{category.name}</TableCell>
+                  <TableCell className="font-medium">{category.name}</TableCell>
+                  <TableCell>{categories.find(p => p.id === category.parentId)?.name || 'None'}</TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>

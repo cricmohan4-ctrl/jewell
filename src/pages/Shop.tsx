@@ -7,12 +7,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Slider } from "@/components/ui/slider";
+import { categories, type Category } from "@/data/categories";
+import { CategoryFilterList, type CategoryWithChildren } from "@/components/CategoryFilterList";
+
+const buildCategoryTree = (items: Category[], parentId: number | null = null): CategoryWithChildren[] => {
+  return items
+    .filter(item => item.parentId === parentId)
+    .map(item => ({
+      ...item,
+      children: buildCategoryTree(items, item.id),
+    }));
+};
 
 const Shop = () => {
+  const categoryTree = buildCategoryTree(categories);
+
   return (
     <div className="container mx-auto py-12 px-4">
       <div className="text-center mb-12">
@@ -23,26 +34,11 @@ const Shop = () => {
         {/* Filters Sidebar */}
         <aside className="lg:col-span-1 sticky top-24">
           <h2 className="text-xl font-semibold mb-4">Filters</h2>
-          <Accordion type="multiple" defaultValue={['category', 'metal', 'price']} className="w-full">
+          <Accordion type="multiple" defaultValue={['category', 'price']} className="w-full">
             <AccordionItem value="category">
               <AccordionTrigger>Category</AccordionTrigger>
               <AccordionContent>
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2"><Checkbox id="rings" /><Label htmlFor="rings">Rings</Label></div>
-                  <div className="flex items-center space-x-2"><Checkbox id="necklaces" /><Label htmlFor="necklaces">Necklaces</Label></div>
-                  <div className="flex items-center space-x-2"><Checkbox id="earrings" /><Label htmlFor="earrings">Earrings</Label></div>
-                  <div className="flex items-center space-x-2"><Checkbox id="bracelets" /><Label htmlFor="bracelets">Bracelets</Label></div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="metal">
-              <AccordionTrigger>Metal</AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2"><Checkbox id="gold" /><Label htmlFor="gold">Gold</Label></div>
-                  <div className="flex items-center space-x-2"><Checkbox id="platinum" /><Label htmlFor="platinum">Platinum</Label></div>
-                  <div className="flex items-center space-x-2"><Checkbox id="diamond" /><Label htmlFor="diamond">Diamond</Label></div>
-                </div>
+                <CategoryFilterList categories={categoryTree} />
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="price">

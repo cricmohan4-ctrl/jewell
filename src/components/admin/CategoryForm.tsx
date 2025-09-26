@@ -13,23 +13,33 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { type Category } from "@/data/categories";
 
 const categoryFormSchema = z.object({
   name: z.string().min(2, { message: "Category name is required." }),
+  parentId: z.string().nullable(),
 });
 
 type CategoryFormProps = {
   onSubmit: (values: z.infer<typeof categoryFormSchema>) => void;
   onCancel: () => void;
   category: Partial<Category> | null;
+  categories: Category[];
 };
 
-export const CategoryForm = ({ onSubmit, onCancel, category }: CategoryFormProps) => {
+export const CategoryForm = ({ onSubmit, onCancel, category, categories }: CategoryFormProps) => {
   const form = useForm<z.infer<typeof categoryFormSchema>>({
     resolver: zodResolver(categoryFormSchema),
     defaultValues: {
       name: category?.name || "",
+      parentId: category?.parentId?.toString() || null,
     },
   });
 
@@ -45,6 +55,33 @@ export const CategoryForm = ({ onSubmit, onCancel, category }: CategoryFormProps
               <FormControl>
                 <Input placeholder="e.g., Rings" {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="parentId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Parent Category</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a parent category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="">None (Top-Level)</SelectItem>
+                  {categories
+                    .filter(c => c.id !== category?.id) // Prevent self-parenting
+                    .map(c => (
+                      <SelectItem key={c.id} value={c.id.toString()}>
+                        {c.name}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
