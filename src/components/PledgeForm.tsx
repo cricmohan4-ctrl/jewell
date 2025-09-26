@@ -26,6 +26,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { toast } from "sonner";
 import { branches } from "@/data/branches";
 import { findNearestBranch } from "@/lib/location";
+import { estimationRates } from "@/data/estimationRates";
 
 const pledgeFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -91,9 +92,9 @@ export const PledgeForm = () => {
       toast.error("Could not access location. Using default branch.", { id: loadingToast });
     }
 
-    // Simple logic to generate a fake estimate
+    // Use the new estimation rates
     const weight = parseFloat(values.jewelWeight) || 10;
-    const baseValue = values.jewelType === 'diamond' ? 50000 : (values.jewelType === 'platinum' ? 3000 : 4500);
+    const baseValue = estimationRates[values.jewelType];
     const randomFactor = 0.9 + Math.random() * 0.2; // +/- 10%
     const estimate = Math.round((weight * baseValue * randomFactor) / 100) * 100;
 
