@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   NavigationMenu,
@@ -11,61 +10,43 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { menuItems, type MenuItem } from '@/data/menus';
-import { cn } from '@/lib/utils';
-
-interface MenuItemWithChildren extends MenuItem {
-  children: MenuItem[];
-}
-
-// Helper function to build a hierarchical tree from a flat list of menu items
-const buildMenuTree = (items: MenuItem[]): MenuItemWithChildren[] => {
-  const itemMap = new Map<number, MenuItemWithChildren>();
-  const tree: MenuItemWithChildren[] = [];
-
-  // First pass: create a map of all items and initialize their children array
-  items.forEach(item => {
-    itemMap.set(item.id, { ...item, children: [] });
-  });
-
-  // Second pass: populate the children arrays and identify the root nodes
-  items.forEach(item => {
-    const mappedItem = itemMap.get(item.id)!;
-    if (item.parentId !== null) {
-      const parent = itemMap.get(item.parentId);
-      if (parent) {
-        parent.children.push(mappedItem);
-      }
-    } else {
-      tree.push(mappedItem);
-    }
-  });
-
-  return tree;
-};
+import { navItems } from '@/data/navigation';
 
 export const DynamicNavigation = () => {
-  const menuTree = buildMenuTree(menuItems);
-
   return (
     <nav className="hidden md:flex">
       <NavigationMenu>
         <NavigationMenuList>
-          {menuTree.map((item) =>
-            item.children.length > 0 ? (
-              <NavigationMenuItem key={item.id}>
+          {navItems.map((item) =>
+            item.megaMenu ? (
+              <NavigationMenuItem key={item.label}>
                 <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[200px] gap-3 p-4">
-                    {item.children.map((child) => (
-                      <ListItem key={child.id} to={child.link} title={child.label} />
-                    ))}
-                  </ul>
+                  <div className="p-6 w-[400px] md:w-[500px]">
+                    <div className="grid grid-cols-2 gap-x-8">
+                      {item.megaMenu.columns.map((column) => (
+                        <div key={column.title}>
+                          <h3 className="font-semibold text-sm text-gray-900 mb-4">{column.title}</h3>
+                          <ul className="space-y-3">
+                            {column.links.map((link) => (
+                              <li key={link.label}>
+                                <NavigationMenuLink asChild>
+                                  <Link to={link.link} className="text-sm text-gray-600 hover:text-primary font-medium">
+                                    {link.label}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             ) : (
-              <NavigationMenuItem key={item.id}>
-                <Link to={item.link} legacyBehavior passHref>
+              <NavigationMenuItem key={item.label}>
+                <Link to={item.link!} legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {item.label}
                   </NavigationMenuLink>
@@ -78,27 +59,3 @@ export const DynamicNavigation = () => {
     </nav>
   );
 };
-
-// A reusable list item component for the dropdown menu
-const ListItem = React.forwardRef<
-  React.ElementRef<typeof Link>,
-  React.ComponentPropsWithoutRef<typeof Link>
->(({ className, title, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <Link
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-        </Link>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
