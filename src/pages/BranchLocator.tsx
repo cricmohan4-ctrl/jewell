@@ -1,28 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
 import { branches, type Branch } from "@/data/branches";
 import { cn } from "@/lib/utils";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import { type LatLngExpression } from "leaflet";
-
-// Component to change map view when selectedBranch changes
-const ChangeView = ({
-  center,
-  zoom,
-}: {
-  center: LatLngExpression;
-  zoom: number;
-}) => {
-  const map = useMap();
-  useEffect(() => {
-    map.setView(center, zoom);
-  }, [center, zoom, map]);
-  return null;
-};
 
 const BranchLocator = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,10 +17,14 @@ const BranchLocator = () => {
     branch.address.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const mapPosition: LatLngExpression = selectedBranch
-    ? [selectedBranch.lat, selectedBranch.lng]
-    : [20.5937, 78.9629]; // Default to center of India
-  const mapZoom = selectedBranch ? 13 : 5;
+  const getMapUrl = () => {
+    if (selectedBranch) {
+      // Use latitude and longitude for a precise pin
+      return `https://maps.google.com/maps?q=${selectedBranch.lat},${selectedBranch.lng}&z=15&output=embed`;
+    }
+    // Default view of India if no branch is selected
+    return `https://maps.google.com/maps?q=India&z=5&output=embed`;
+  };
 
   return (
     <div className="container mx-auto py-12 px-4">
@@ -89,35 +76,16 @@ const BranchLocator = () => {
 
         {/* Right Column: Map */}
         <div className="lg:col-span-2 h-[500px] lg:h-[700px] rounded-lg border overflow-hidden">
-          <MapContainer
-            center={mapPosition}
-            zoom={mapZoom}
-            scrollWheelZoom={false}
-            style={{ height: "100%", width: "100%" }}
-          >
-            <ChangeView center={mapPosition} zoom={mapZoom} />
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {filteredBranches.map((branch) => (
-              <Marker
-                key={branch.id}
-                position={[branch.lat, branch.lng]}
-                eventHandlers={{
-                  click: () => {
-                    setSelectedBranch(branch);
-                  },
-                }}
-              >
-                <Popup>
-                  <b>{branch.name}</b>
-                  <br />
-                  {branch.address}
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
+          <iframe
+            title="Branch Location"
+            src={getMapUrl()}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={true}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </div>
     </div>
