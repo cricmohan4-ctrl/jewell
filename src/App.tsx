@@ -17,6 +17,7 @@ import PriceEstimate from "./pages/PriceEstimate";
 import AdminBranches from "./pages/admin/Branches";
 import AdminSubmissions from "./pages/admin/Submissions";
 import Shop from "./pages/Shop";
+import AdminMenus from "./pages/admin/Menus";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
             <Route index element={<AdminDashboard />} />
             <Route path="submissions" element={<AdminSubmissions />} />
             <Route path="branches" element={<AdminBranches />} />
+            <Route path="menus" element={<AdminMenus />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
