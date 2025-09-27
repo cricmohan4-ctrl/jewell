@@ -7,6 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -27,6 +28,18 @@ const testimonials = [
     quote: "The staff at the branch were very professional and helpful. I felt secure throughout the transaction.",
     avatar: "AM",
   },
+  {
+    name: "Suresh Kumar",
+    title: "Excellent Value",
+    quote: "I compared their estimate with local jewelers and JewelPledge offered the best value by far. The online system is a game-changer.",
+    avatar: "SK",
+  },
+  {
+    name: "Deepika Rao",
+    title: "Seamless Experience",
+    quote: "From getting an estimate online to the final appraisal at the branch, everything was incredibly smooth. I'm very impressed.",
+    avatar: "DR",
+  },
 ];
 
 export const Testimonials = () => {
@@ -40,30 +53,36 @@ export const Testimonials = () => {
         <Carousel
           opts={{
             align: "start",
+            loop: true,
           }}
-          className="w-full max-w-4xl mx-auto"
+          className="w-full max-w-6xl mx-auto"
         >
-          <CarouselContent>
+          <CarouselContent className="-ml-4">
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex flex-col items-center text-center p-6">
-                      <Avatar className="mb-4">
-                        <AvatarImage src={`https://api.dicebear.com/8.x/lorelei/svg?seed=${testimonial.name}`} />
-                        <AvatarFallback>{testimonial.avatar}</AvatarFallback>
-                      </Avatar>
-                      <p className="text-muted-foreground mb-4">"{testimonial.quote}"</p>
-                      <span className="font-semibold">{testimonial.name}</span>
-                      <span className="text-sm text-gray-400">{testimonial.title}</span>
+              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <div className="p-1 h-full">
+                  <Card className="h-full flex flex-col justify-between">
+                    <CardContent className="p-6 flex flex-col items-start text-left">
+                      <Quote className="h-8 w-8 text-primary mb-4" />
+                      <p className="text-muted-foreground mb-6 flex-grow">"{testimonial.quote}"</p>
+                      <div className="flex items-center gap-4">
+                        <Avatar>
+                          <AvatarImage src={`https://api.dicebear.com/8.x/lorelei/svg?seed=${testimonial.name}`} />
+                          <AvatarFallback>{testimonial.avatar}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <span className="font-semibold">{testimonial.name}</span>
+                          <p className="text-sm text-gray-500">{testimonial.title}</p>
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="ml-[-50px]" />
+          <CarouselNext className="mr-[-50px]" />
         </Carousel>
       </div>
     </section>
