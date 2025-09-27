@@ -21,11 +21,11 @@ const steps = [
 
 export const HowItWorks = () => {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900">How It Works</h2>
-          <p className="mt-4 text-lg text-gray-500">A simple 3-step process to get value for your jewelry.</p>
+          <h2 className="text-3xl font-extrabold text-foreground">How It Works</h2>
+          <p className="mt-4 text-lg text-muted-foreground">A simple 3-step process to get value for your jewelry.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
@@ -37,7 +37,7 @@ export const HowItWorks = () => {
                 <CardTitle>{step.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-500">{step.description}</p>
+                <p className="text-muted-foreground">{step.description}</p>
               </CardContent>
             </Card>
           ))}

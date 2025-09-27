@@ -31,11 +31,11 @@ const testimonials = [
 
 export const Testimonials = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900">What Our Customers Say</h2>
-          <p className="mt-4 text-lg text-gray-500">Trusted by thousands of customers across the country.</p>
+          <h2 className="text-3xl font-extrabold text-foreground">What Our Customers Say</h2>
+          <p className="mt-4 text-lg text-muted-foreground">Trusted by thousands of customers across the country.</p>
         </div>
         <Carousel
           opts={{
@@ -53,7 +53,7 @@ export const Testimonials = () => {
                         <AvatarImage src={`https://api.dicebear.com/8.x/lorelei/svg?seed=${testimonial.name}`} />
                         <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                       </Avatar>
-                      <p className="text-gray-500 mb-4">"{testimonial.quote}"</p>
+                      <p className="text-muted-foreground mb-4">"{testimonial.quote}"</p>
                       <span className="font-semibold">{testimonial.name}</span>
                       <span className="text-sm text-gray-400">{testimonial.title}</span>
                     </CardContent>
