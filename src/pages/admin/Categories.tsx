@@ -64,20 +64,21 @@ const AdminCategories = () => {
     setCategories(categories.filter((category) => !idsToDelete.has(category.id)));
   };
 
-  const handleFormSubmit = (values: { name: string; parentId: string | null }) => {
+  const handleFormSubmit = (values: { name: string; parentId: string | null; image?: string }) => {
     const parentId = values.parentId ? parseInt(values.parentId, 10) : null;
 
     if (editingCategory) {
       setCategories(
         categories.map((category) =>
-          category.id === editingCategory.id ? { ...category, name: values.name, parentId } : category
+          category.id === editingCategory.id ? { ...category, name: values.name, parentId, image: values.image || undefined } : category
         )
       );
     } else {
-      const newCategory = {
+      const newCategory: Category = {
         name: values.name,
         parentId,
         id: Math.max(...categories.map((c) => c.id), 0) + 1,
+        image: values.image || undefined,
       };
       setCategories([...categories, newCategory]);
     }
@@ -121,6 +122,7 @@ const AdminCategories = () => {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead>Image</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Parent</TableHead>
                 <TableHead>Actions</TableHead>
@@ -129,6 +131,13 @@ const AdminCategories = () => {
             <TableBody>
               {categories.map((category) => (
                 <TableRow key={category.id}>
+                  <TableCell>
+                    {category.image ? (
+                      <img src={category.image} alt={category.name} className="h-10 w-10 rounded-md object-cover" />
+                    ) : (
+                      <div className="h-10 w-10 rounded-md bg-gray-100" />
+                    )}
+                  </TableCell>
                   <TableCell className="font-medium">{category.name}</TableCell>
                   <TableCell>{categories.find(p => p.id === category.parentId)?.name || 'None'}</TableCell>
                   <TableCell>

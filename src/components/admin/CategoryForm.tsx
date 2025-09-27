@@ -25,6 +25,7 @@ import { type Category } from "@/data/categories";
 const categoryFormSchema = z.object({
   name: z.string().min(2, { message: "Category name is required." }),
   parentId: z.string().nullable(),
+  image: z.string().url({ message: "Please enter a valid URL." }).optional().or(z.literal('')),
 });
 
 type CategoryFormProps = {
@@ -40,6 +41,7 @@ export const CategoryForm = ({ onSubmit, onCancel, category, categories }: Categ
     defaultValues: {
       name: category?.name || "",
       parentId: category?.parentId?.toString() || null,
+      image: category?.image || "",
     },
   });
 
@@ -82,6 +84,19 @@ export const CategoryForm = ({ onSubmit, onCancel, category, categories }: Categ
                     ))}
                 </SelectContent>
               </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Image URL</FormLabel>
+              <FormControl>
+                <Input placeholder="https://example.com/image.png" {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
