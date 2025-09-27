@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -31,39 +30,33 @@ const banners = [
 export const PromotionalBanners = () => {
   return (
     <section className="py-16 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {banners.map((banner, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card className="overflow-hidden border-none">
-                    <CardContent className="relative flex aspect-[21/9] items-center justify-start p-0">
-                      <img src={banner.image} alt={banner.title} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
-                      <div className="absolute text-left text-white p-8 md:p-16 max-w-2xl">
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight">{banner.title}</h2>
-                        <p className="mt-4 text-md md:text-lg">{banner.subtitle}</p>
-                        <Button asChild size="lg" className="mt-8">
-                          <Link to={banner.link}>{banner.buttonText}</Link>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        className="w-full"
+      >
+        <CarouselContent>
+          {banners.map((banner, index) => (
+            <CarouselItem key={index}>
+              <div className="relative flex aspect-[21/9] items-center justify-start">
+                <img src={banner.image} alt={banner.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+                <div className="absolute text-left text-white p-8 md:p-16 max-w-2xl">
+                  <h2 className="text-3xl md:text-5xl font-bold tracking-tight">{banner.title}</h2>
+                  <p className="mt-4 text-md md:text-lg">{banner.subtitle}</p>
+                  <Button asChild size="lg" className="mt-8">
+                    <Link to={banner.link}>{banner.buttonText}</Link>
+                  </Button>
                 </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="absolute left-4" />
-          <CarouselNext className="absolute right-4" />
-        </Carousel>
-      </div>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="absolute left-4" />
+        <CarouselNext className="absolute right-4" />
+      </Carousel>
     </section>
   );
 };
