@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { type Branch } from "@/data/branches";
+import { useEffect } from "react";
 
 const branchFormSchema = z.object({
   name: z.string().min(2, { message: "Branch name is required." }),
@@ -38,6 +39,15 @@ export const BranchForm = ({ onSubmit, onCancel, branch }: BranchFormProps) => {
       lng: branch?.lng || 0,
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      name: branch?.name || "",
+      address: branch?.address || "",
+      lat: branch?.lat || 0,
+      lng: branch?.lng || 0,
+    });
+  }, [branch, form]);
 
   return (
     <Form {...form}>

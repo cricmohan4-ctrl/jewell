@@ -91,7 +91,6 @@ const AdminBranches = () => {
             </DialogDescription>
           </DialogHeader>
           <BranchForm
-            key={editingBranch ? editingBranch.id : 'new'}
             onSubmit={handleFormSubmit}
             branch={editingBranch}
             onCancel={() => setIsDialogOpen(false)}

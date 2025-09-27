@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { type MenuItem } from "@/data/menus";
+import { useEffect } from "react";
 
 const menuFormSchema = z.object({
   label: z.string().min(2, { message: "Label is required." }),
@@ -44,6 +45,14 @@ export const MenuForm = ({ onSubmit, onCancel, menuItem, menuItems }: MenuFormPr
       parentId: menuItem?.parentId?.toString() || null,
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      label: menuItem?.label || "",
+      link: menuItem?.link || "",
+      parentId: menuItem?.parentId?.toString() || null,
+    });
+  }, [menuItem, form]);
 
   return (
     <Form {...form}>

@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select";
 import { type Product } from "@/data/products";
 import { type Category } from "@/data/categories";
+import { useEffect } from "react";
 
 const productFormSchema = z.object({
   name: z.string().min(2, { message: "Product name is required." }),
@@ -48,6 +49,15 @@ export const ProductForm = ({ onSubmit, onCancel, product, categories }: Product
       categoryId: product?.categoryId?.toString() || "",
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      name: product?.name || "",
+      description: product?.description || "",
+      price: product?.price || 0,
+      categoryId: product?.categoryId?.toString() || "",
+    });
+  }, [product, form]);
 
   return (
     <Form {...form}>

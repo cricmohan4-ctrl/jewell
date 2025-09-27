@@ -104,7 +104,6 @@ const AdminProducts = () => {
             </DialogDescription>
           </DialogHeader>
           <ProductForm
-            key={editingProduct ? editingProduct.id : 'new'}
             onSubmit={handleFormSubmit}
             product={editingProduct}
             categories={categories}

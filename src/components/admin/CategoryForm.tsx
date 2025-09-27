@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { type Category } from "@/data/categories";
+import { useEffect } from "react";
 
 const categoryFormSchema = z.object({
   name: z.string().min(2, { message: "Category name is required." }),
@@ -44,6 +45,14 @@ export const CategoryForm = ({ onSubmit, onCancel, category, categories }: Categ
       image: category?.image || "",
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      name: category?.name || "",
+      parentId: category?.parentId?.toString() || null,
+      image: category?.image || "",
+    });
+  }, [category, form]);
 
   return (
     <Form {...form}>

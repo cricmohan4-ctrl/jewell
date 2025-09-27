@@ -107,7 +107,6 @@ const AdminMenus = () => {
             </DialogDescription>
           </DialogHeader>
           <MenuForm
-            key={editingItem && 'id' in editingItem ? editingItem.id : 'new'}
             onSubmit={handleFormSubmit}
             menuItem={editingItem}
             menuItems={menuItems}

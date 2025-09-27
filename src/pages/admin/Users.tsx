@@ -92,7 +92,6 @@ const AdminUsers = () => {
             </DialogDescription>
           </DialogHeader>
           <UserForm
-            key={editingUser ? editingUser.id : 'new'}
             onSubmit={handleFormSubmit}
             user={editingUser}
             onCancel={() => setIsDialogOpen(false)}

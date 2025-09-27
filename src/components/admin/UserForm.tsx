@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { type User } from "@/data/users";
+import { useEffect } from "react";
 
 const userFormSchema = z.object({
   name: z.string().min(2, { message: "Name is required." }),
@@ -45,6 +46,15 @@ export const UserForm = ({ onSubmit, onCancel, user }: UserFormProps) => {
       status: user?.status || "Active",
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      name: user?.name || "",
+      email: user?.email || "",
+      role: user?.role || "Customer",
+      status: user?.status || "Active",
+    });
+  }, [user, form]);
 
   return (
     <Form {...form}>

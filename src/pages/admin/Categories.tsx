@@ -104,7 +104,6 @@ const AdminCategories = () => {
             </DialogDescription>
           </DialogHeader>
           <CategoryForm
-            key={editingCategory ? editingCategory.id : 'new'}
             onSubmit={handleFormSubmit}
             category={editingCategory}
             categories={categories}
