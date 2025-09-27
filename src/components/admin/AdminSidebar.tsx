@@ -1,16 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
-import { Gem, LayoutDashboard, FileText, Building, Menu, Package, Tags, DollarSign, Users } from "lucide-react";
+import { Gem, LayoutDashboard, FileText, Building, Menu, Package, Tags, DollarSign, Users, GalleryHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/admin", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/submissions", icon: FileText, label: "Submissions" },
+  { href: "/admin/users", icon: Users, label: "Users" },
   { href: "/admin/branches", icon: Building, label: "Branches" },
+  { href: "/admin/estimations", icon: DollarSign, label: "Estimations" },
+  { href: "/admin/slides", icon: GalleryHorizontal, label: "Hero Slides" },
   { href: "/admin/menus", icon: Menu, label: "Menus" },
   { href: "/admin/products", icon: Package, label: "Products" },
   { href: "/admin/categories", icon: Tags, label: "Categories" },
-  { href: "/admin/estimations", icon: DollarSign, label: "Estimations" },
-  { href: "/admin/users", icon: Users, label: "Users" },
 ];
 
 export const AdminSidebar = () => {

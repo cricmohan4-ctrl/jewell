@@ -31,6 +31,7 @@ import { AuthProvider } from "./context/AuthContext";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminSlides from "./pages/admin/Slides";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +75,7 @@ const App = () => (
                 <Route path="categories" element={<AdminCategories />} />
                 <Route path="estimations" element={<AdminEstimations />} />
                 <Route path="users" element={<AdminUsers />} />
+                <Route path="slides" element={<AdminSlides />} />
               </Route>
 
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
