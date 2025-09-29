@@ -9,10 +9,10 @@ export interface Slide {
 
 export const slidesData: Slide[] = [
   {
-    id: 5, // New ID for the new slide
+    id: 5,
     title: "New Arrivals: Blue Gem Collection",
     subtitle: "Discover our latest stunning pieces with vibrant blue gems.",
-    image: "/1920-1.png", // Using the new local image path
+    image: "/1920-1.png",
     buttonText: "Shop New Collection",
     link: "/shop",
   },
@@ -25,11 +25,11 @@ export const slidesData: Slide[] = [
     link: "/shop",
   },
   {
-    id: 1,
-    title: "Radiant Collections",
-    subtitle: "Discover jewelry that tells your story.",
-    image: "https://images.unsplash.com/photo-1611652022417-a55339f98236?q=80&w=2070&auto=format&fit=crop",
-    buttonText: "Shop Now",
+    id: 6, // New ID for the third slide
+    title: "Crafted for You",
+    subtitle: "Experience the artistry in every piece.",
+    image: "/1920-8.png", // Using the new local image path
+    buttonText: "View Craftsmanship",
     link: "/shop",
   },
 ];
