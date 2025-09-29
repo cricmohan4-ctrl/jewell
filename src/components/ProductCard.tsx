@@ -14,8 +14,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Card className="flex flex-col">
       <CardHeader>
-        <div className="aspect-square bg-gray-100 rounded-md flex items-center justify-center">
-          <img src={product.image} alt={product.name} className="w-3/4 h-3/4 object-contain" />
+        <div className="aspect-square bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
+          <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded-md" />
         </div>
       </CardHeader>
       <CardContent className="flex-grow">
