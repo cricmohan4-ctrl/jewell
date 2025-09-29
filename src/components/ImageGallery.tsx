@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 const galleryImages = [
-  { src: "https://images.unsplash.com/photo-1611893459332-a5a1c7b69e5c?q=80&w=600&auto=format&fit=crop", alt: "Diamond ring", link: "/shop/rings" },
-  { src: "https://images.unsplash.com/photo-1589674781758-a3c03c35539b?q=80&w=600&auto=format&fit=crop", alt: "Gold necklace", link: "/shop/necklaces" },
-  { src: "https://images.unsplash.com/photo-1627293585420-13ad3b23f37f?q=80&w=600&auto=format&fit=crop", alt: "Elegant earrings", link: "/shop/earrings" },
-  { src: "https://images.unsplash.com/photo-1611591437281-462bf4a21456?q=80&w=600&auto=format&fit=crop", alt: "Collection of bracelets", link: "/shop/bracelets" },
-  { src: "https://images.unsplash.com/photo-1591213238023-41a189b9f11e?q=80&w=600&auto=format&fit=crop", alt: "Luxury watch", link: "/shop" },
-  { src: "https://images.unsplash.com/photo-1600170311833-c2cf5280ce64?q=80&w=600&auto=format&fit=crop", alt: "Pendant", link: "/shop" },
+  { src: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg", alt: "Diamond ring", link: "/shop/rings" },
+  { src: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg", alt: "Gold necklace", link: "/shop/necklaces" },
+  { src: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg", alt: "Elegant earrings", link: "/shop/earrings" },
+  { src: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg", alt: "Collection of bracelets", link: "/shop/bracelets" },
+  { src: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg", alt: "Luxury watch", link: "/shop" },
+  { src: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg", alt: "Pendant", link: "/shop" },
 ];
 
 export const ImageGallery = () => {
