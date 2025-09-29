@@ -14,8 +14,8 @@ export const ShopByCategory = () => {
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
           {categories.map((category) => (
             <Link to={`/shop/${category.name.toLowerCase().replace(/\s+/g, '-')}`} key={category.id} className="group text-center">
-              <div className="aspect-square bg-rose-50 rounded-xl flex items-center justify-center p-4 border-2 border-transparent group-hover:border-primary transition-all duration-300">
-                <img src={category.image} alt={category.name} className="w-full h-full object-contain" />
+              <div className="aspect-square bg-rose-50 rounded-xl flex items-center justify-center border-2 border-transparent group-hover:border-primary transition-all duration-300">
+                <img src={category.image} alt={category.name} className="w-full h-full object-cover rounded-xl" />
               </div>
               <h3 className="mt-2 text-sm font-medium text-gray-700 group-hover:text-primary">{category.name}</h3>
             </Link>
