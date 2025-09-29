@@ -9,6 +9,14 @@ export interface Slide {
 
 export const slidesData: Slide[] = [
   {
+    id: 4, // New ID for the new slide
+    title: "Exquisite Emerald Collection",
+    subtitle: "Discover our stunning new arrivals.",
+    image: "/cms-banner-01.jpg", // Using the local image path
+    buttonText: "Shop Collection",
+    link: "/shop",
+  },
+  {
     id: 1,
     title: "Radiant Collections",
     subtitle: "Discover jewelry that tells your story.",
