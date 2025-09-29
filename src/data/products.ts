@@ -15,7 +15,7 @@ export const products: Product[] = [
     name: "Elegant Diamond Necklace",
     description: "A stunning necklace featuring a brilliant-cut diamond.",
     price: 75000,
-    image: "https://images.unsplash.com/photo-1599357382222-141256d055e2?q=80&w=800&auto=format&fit=crop",
+    image: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg",
     categoryId: 3,
   },
   {
@@ -23,7 +23,7 @@ export const products: Product[] = [
     name: "Classic Gold Bangle",
     description: "22-karat gold bangle with intricate craftsmanship.",
     price: 55000,
-    image: "https://images.unsplash.com/photo-1623900341235-439567394971?q=80&w=800&auto=format&fit=crop",
+    image: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg",
     categoryId: 4,
   },
   {
@@ -31,7 +31,7 @@ export const products: Product[] = [
     name: "Sapphire Stud Earrings",
     description: "Deep blue sapphires set in a platinum frame.",
     price: 42000,
-    image: "https://images.unsplash.com/photo-1627293585420-13ad3b23f37f?q=80&w=800&auto=format&fit=crop",
+    image: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg",
     categoryId: 2,
   },
   {
@@ -39,7 +39,7 @@ export const products: Product[] = [
     name: "Ruby Engagement Ring",
     description: "A vibrant ruby centerpiece surrounded by smaller diamonds.",
     price: 98000,
-    image: "https://images.unsplash.com/photo-1598559762452-37b4d8374118?q=80&w=800&auto=format&fit=crop",
+    image: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg",
     categoryId: 1,
   },
   {
@@ -47,7 +47,7 @@ export const products: Product[] = [
     name: "Pearl Drop Pendant",
     description: "A single, lustrous pearl hanging from a silver chain.",
     price: 25000,
-    image: "https://images.unsplash.com/photo-1617038260897-41a131549a52?q=80&w=800&auto=format&fit=crop",
+    image: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg",
     categoryId: 3,
   },
   {
@@ -55,7 +55,7 @@ export const products: Product[] = [
     name: "Men's Platinum Band",
     description: "A sleek and modern band for the discerning gentleman.",
     price: 35000,
-    image: "https://images.unsplash.com/photo-1611591437281-462bf4a21456?q=80&w=800&auto=format&fit=crop",
+    image: "/BISP0584R13_WAA18DIG6SOG60030_ABCD00-PICS-00001-1024-66817.jpeg",
     categoryId: 1,
   },
 ];
