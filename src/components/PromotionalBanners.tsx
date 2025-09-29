@@ -9,23 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-
-const banners = [
-  {
-    title: "Wedding Season Specials",
-    subtitle: "Find the perfect ring for your perfect day. Up to 20% off.",
-    image: "https://images.unsplash.com/photo-1597655601842-427b7c445884?q=80&w=2070&auto=format&fit=crop",
-    buttonText: "Shop Wedding Rings",
-    link: "/shop/rings/wedding",
-  },
-  {
-    title: "Gifts That Shine",
-    subtitle: "Celebrate every moment with a gift that lasts a lifetime.",
-    image: "https://images.unsplash.com/photo-1611955923923-3fe251c89579?q=80&w=1933&auto=format&fit=crop",
-    buttonText: "Explore Gifts",
-    link: "/shop",
-  },
-];
+import { slidesData } from "@/data/slides"; // Import slidesData
 
 export const PromotionalBanners = () => {
   return (
@@ -38,7 +22,7 @@ export const PromotionalBanners = () => {
         className="w-full"
       >
         <CarouselContent>
-          {banners.map((banner, index) => (
+          {slidesData.map((banner, index) => ( // Use slidesData here
             <CarouselItem key={index}>
               <div className="relative flex aspect-[21/9] items-center justify-start">
                 <img src={banner.image} alt={banner.title} className="w-full h-full object-cover" />
