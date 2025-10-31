@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { IndianRupee, Trash2 } from "lucide-react";
+import { DollarSign, Trash2 } from "lucide-react"; // Changed from IndianRupee
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
@@ -50,7 +50,7 @@ const CartPage = () => {
                         </div>
                       </TableCell>
                       <TableCell className="flex items-center">
-                        <IndianRupee className="h-4 w-4 mr-1" />{item.price.toLocaleString('en-IN')}
+                        <DollarSign className="h-4 w-4 mr-1" />{item.price.toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })} {/* Changed locale and currency */}
                       </TableCell>
                       <TableCell>
                         <Input
@@ -62,7 +62,7 @@ const CartPage = () => {
                         />
                       </TableCell>
                       <TableCell className="text-right flex items-center justify-end">
-                        <IndianRupee className="h-4 w-4 mr-1" />{(item.price * item.quantity).toLocaleString('en-IN')}
+                        <DollarSign className="h-4 w-4 mr-1" />{(item.price * item.quantity).toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })} {/* Changed locale and currency */}
                       </TableCell>
                       <TableCell>
                         <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
@@ -84,7 +84,7 @@ const CartPage = () => {
             <CardContent className="space-y-4">
               <div className="flex justify-between">
                 <span>Subtotal ({totalItems} items)</span>
-                <span className="font-medium flex items-center"><IndianRupee className="h-4 w-4 mr-1" />{totalPrice.toLocaleString('en-IN')}</span>
+                <span className="font-medium flex items-center"><DollarSign className="h-4 w-4 mr-1" />{totalPrice.toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })}</span> {/* Changed locale and currency */}
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
@@ -92,7 +92,7 @@ const CartPage = () => {
               </div>
               <div className="flex justify-between font-bold text-lg border-t pt-4">
                 <span>Total</span>
-                <span className="flex items-center"><IndianRupee className="h-5 w-5 mr-1" />{totalPrice.toLocaleString('en-IN')}</span>
+                <span className="flex items-center"><DollarSign className="h-5 w-5 mr-1" />{totalPrice.toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })}</span> {/* Changed locale and currency */}
               </div>
             </CardContent>
             <CardFooter>

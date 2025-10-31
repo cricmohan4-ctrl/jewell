@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { type Product } from "@/data/products";
-import { IndianRupee, ShoppingCart } from "lucide-react";
+import { DollarSign, ShoppingCart } from "lucide-react"; // Changed from IndianRupee
 import { useCart } from "@/context/CartContext";
 
 type ProductCardProps = {
@@ -24,8 +24,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <p className="text-xl font-bold flex items-center">
-          <IndianRupee className="h-5 w-5 mr-1" />
-          {product.price.toLocaleString('en-IN')}
+          <DollarSign className="h-5 w-5 mr-1" /> {/* Changed from IndianRupee */}
+          {product.price.toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })} {/* Changed locale and currency */}
         </p>
         <Button onClick={() => addToCart(product)}>
           <ShoppingCart className="mr-2 h-4 w-4" />

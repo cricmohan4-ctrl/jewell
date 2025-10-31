@@ -30,7 +30,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { MoreHorizontal, PlusCircle, IndianRupee } from "lucide-react";
+import { MoreHorizontal, PlusCircle, DollarSign } from "lucide-react"; // Changed from IndianRupee
 import { products as initialProducts, type Product } from "@/data/products";
 import { categories as initialCategories, type Category } from "@/data/categories";
 import { ProductForm } from "@/components/admin/ProductForm";
@@ -134,8 +134,8 @@ const AdminProducts = () => {
                   <TableCell className="font-medium">{product.name}</TableCell>
                   <TableCell>{categoryMap[product.categoryId] || 'N/A'}</TableCell>
                   <TableCell className="flex items-center">
-                    <IndianRupee className="h-4 w-4 mr-1" />
-                    {product.price.toLocaleString('en-IN')}
+                    <DollarSign className="h-4 w-4 mr-1" /> {/* Changed from IndianRupee */}
+                    {product.price.toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })} {/* Changed locale and currency */}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>

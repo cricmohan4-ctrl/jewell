@@ -3,7 +3,7 @@
 import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { CheckCircle, IndianRupee } from "lucide-react";
+import { CheckCircle, DollarSign } from "lucide-react"; // Changed from IndianRupee
 
 const OrderConfirmationPage = () => {
   const location = useLocation();
@@ -40,12 +40,12 @@ const OrderConfirmationPage = () => {
             {order.items.map((item: any) => (
               <div key={item.id} className="flex justify-between items-center text-sm mb-2">
                 <span>{item.name} x {item.quantity}</span>
-                <span className="font-medium flex items-center"><IndianRupee className="h-3 w-3 mr-1" />{(item.price * item.quantity).toLocaleString('en-IN')}</span>
+                <span className="font-medium flex items-center"><DollarSign className="h-3 w-3 mr-1" />{(item.price * item.quantity).toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })}</span>
               </div>
             ))}
             <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
               <span>Total</span>
-              <span className="flex items-center"><IndianRupee className="h-5 w-5 mr-1" />{order.totalPrice.toLocaleString('en-IN')}</span>
+              <span className="flex items-center"><DollarSign className="h-5 w-5 mr-1" />{order.totalPrice.toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })}</span>
             </div>
           </div>
           <Button asChild size="lg" className="w-full">

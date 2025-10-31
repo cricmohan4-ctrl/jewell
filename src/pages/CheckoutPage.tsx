@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { IndianRupee } from "lucide-react";
+import { DollarSign } from "lucide-react"; // Changed from IndianRupee
 
 const checkoutSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -76,12 +76,12 @@ const CheckoutPage = () => {
                     <img src={item.image} alt={item.name} className="w-12 h-12 rounded bg-gray-100" />
                     <span>{item.name} x {item.quantity}</span>
                   </div>
-                  <span className="font-medium flex items-center"><IndianRupee className="h-3 w-3 mr-1" />{(item.price * item.quantity).toLocaleString('en-IN')}</span>
+                  <span className="font-medium flex items-center"><DollarSign className="h-3 w-3 mr-1" />{(item.price * item.quantity).toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })}</span>
                 </div>
               ))}
               <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
                 <span>Total</span>
-                <span className="flex items-center"><IndianRupee className="h-5 w-5 mr-1" />{totalPrice.toLocaleString('en-IN')}</span>
+                <span className="flex items-center"><DollarSign className="h-5 w-5 mr-1" />{totalPrice.toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })}</span>
               </div>
             </CardContent>
           </Card>

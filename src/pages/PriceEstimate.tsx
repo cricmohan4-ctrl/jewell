@@ -2,7 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, IndianRupee } from "lucide-react";
+import { MapPin, DollarSign } from "lucide-react"; // Changed from IndianRupee
 import { AppointmentDialog } from "@/components/AppointmentDialog";
 
 const PriceEstimate = () => {
@@ -22,8 +22,8 @@ const PriceEstimate = () => {
             <div className="bg-primary/10 p-6 rounded-lg">
               <p className="text-sm text-gray-500">Estimated Value</p>
               <p className="text-5xl font-bold text-primary flex items-center justify-center">
-                <IndianRupee className="h-10 w-10 mr-2" />
-                {estimate.toLocaleString('en-IN')}
+                <DollarSign className="h-10 w-10 mr-2" /> {/* Changed from IndianRupee */}
+                {estimate.toLocaleString('en-MY', { style: 'currency', currency: 'MYR' })} {/* Changed locale and currency */}
               </p>
             </div>
             <div className="border-t pt-6">
