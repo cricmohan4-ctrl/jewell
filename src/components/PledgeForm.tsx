@@ -26,7 +26,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { toast } from "sonner";
 import { branches } from "@/data/branches";
 import { findNearestBranch } from "@/lib/location";
-import { estimationRates } from "@/data/estimationRates";
+import { getEstimationRates } from "@/data/estimationRates"; // Import getEstimationRates
 
 const pledgeFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -92,9 +92,10 @@ export const PledgeForm = () => {
       toast.error("Could not access location. Using default branch.", { id: loadingToast });
     }
 
-    // Use the new estimation rates
-    const weight = parseFloat(values.jewelWeight) || 10;
-    const baseValue = estimationRates[values.jewelType];
+    // Use the dynamically loaded estimation rates
+    const currentEstimationRates = getEstimationRates();
+    const weight = parseFloat(values.jewelWeight) || 0; // Ensure weight is a number
+    const baseValue = currentEstimationRates[values.jewelType];
     const randomFactor = 0.9 + Math.random() * 0.2; // +/- 10%
     const estimate = Math.round((weight * baseValue * randomFactor) / 100) * 100;
 
@@ -233,13 +234,13 @@ export const PledgeForm = () => {
                     />
                   </FormControl>
                   <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full" size="lg">Get My Estimate</Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="w-full" size="lg">Get My Estimate</Button>
+      </form>
+    </Form>
+  </CardContent>
+</Card>
   );
 };

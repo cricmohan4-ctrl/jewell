@@ -8,17 +8,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { estimationRates as initialRates, type JewelType } from "@/data/estimationRates";
+import { getEstimationRates, setEstimationRates, type JewelType } from "@/data/estimationRates";
 import { EstimationForm } from "@/components/admin/EstimationForm";
 import { toast } from "sonner";
 
 const AdminEstimations = () => {
-  const [rates, setRates] = useState<Record<JewelType, number>>(initialRates);
+  const [rates, setRates] = useState<Record<JewelType, number>>(() => getEstimationRates());
 
   const handleFormSubmit = (values: Record<JewelType, number>) => {
     setRates(values);
-    // In a real app, you'd save this to a database.
-    // Here, we're updating the state for the user's session.
+    setEstimationRates(values); // Save to local storage
     toast.success("Estimation rates updated successfully!");
     console.log("Updated rates:", values);
   };
