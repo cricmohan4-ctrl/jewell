@@ -30,7 +30,7 @@ const AdminEstimations = () => {
         <CardHeader>
           <CardTitle>Jewelry Rates</CardTitle>
           <CardDescription>
-            Set the base price per unit (gram/carat) for each jewel type.
+            Set the base price per unit (gram/carat) for each jewel type in Malaysian Ringgit (MYR).
           </CardDescription>
         </CardHeader>
         <CardContent>
